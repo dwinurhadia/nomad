@@ -1,14 +1,13 @@
 all:
+    vars:
+        ansible_user: d
     hosts:
         node1:
-            ansible_user : d
             ansible_host : 10.55.254.133
             package:
                 name: ntpdate
                 state: present
         node2:
-            ansible_user : d
             ansible_host : 10.55.254.134
         node3:
-            ansible_user : d
             ansible_host : 10.55.254.132
