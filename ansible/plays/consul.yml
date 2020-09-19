@@ -2,12 +2,13 @@
 - hosts: consul_server
   become: yes
   become_user: root
-  - roles:
+  roles:
     - consul
 
-# #setup console client
-# - host: all
-#   become: yes
-#   become_user: root
-#   task:
-#     - include_role: consul
+
+#setup console client
+- hosts: all:!consul_server
+  become: yes
+  become_user: root
+  roles:
+    - consul

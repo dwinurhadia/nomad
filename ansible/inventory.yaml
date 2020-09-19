@@ -7,7 +7,12 @@ all:
             package:
                 name: ntpdate
                 state: present
+            consul_server : yes
         node2:
             ansible_host : 10.55.254.134
         node3:
             ansible_host : 10.55.254.132
+    children:
+        consul_server:
+            hosts:
+                node1:

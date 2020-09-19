@@ -1,0 +1,21 @@
+#server = true
+#data_dir = "/etc/consul"
+#data_dir = "/var/lib/consul"
+#bootstrap = true
+#bootstrap_expect = 1
+
+data_dir = "/var/lib/consul"
+ui = true
+
+bind_addr = "0.0.0.0"
+client_addr = "0.0.0.0"
+advertise_addr = "{{ ansible_host }}"
+
+{% if consul_server %}
+server = true
+bootstrap = true
+bootstrap_expect = 1
+{% endif %}
+
+retry_join = ["10.55.254.133"]
+retry_interval = "10s"
