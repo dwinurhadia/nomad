@@ -17,6 +17,7 @@ vagrant ssh-config > ssh_config
 ### Command:
 
 ### SSH Copy
-ssh-copy-id -i /home/d/.ssh/id_rsa.pub d@node-2
+```ssh-copy-id -i /home/d/.ssh/id_rsa.pub d@node-2
 ssh-copy-id -i /home/d/.ssh/id_rsa.pub d@node-3
 ssh-copy-id -i /home/d/.ssh/id_rsa.pub d@node-1
+```
