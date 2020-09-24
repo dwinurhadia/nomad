@@ -29,3 +29,16 @@
     path: /usr/local/bin/consul-template
     src: /opt/consul-template/consul-template
     state: link
+
+- name: Copy service consule
+  template:
+    src: webserver.json
+    dest: /etc/consul/webserver.json
+
+#start service
+- name: Restart consul service
+  systemd:
+    name: consul
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
