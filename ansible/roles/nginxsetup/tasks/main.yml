@@ -1,0 +1,64 @@
+# - name: Ensure group "nginx" exists
+#   group:
+#     name: nginx
+#     state: present
+  
+# - name: Add the user nginx
+#   user:
+#     name: nginx
+#     shell: /bin/nologin
+#     groups: nginx
+
+# - name: Install nginx
+#   apt: name=nginx state=present
+#   tags: nginx
+
+
+- name: Nginx sites-available files
+  template:
+    # src: "templates/sites-available/{{ item.dest }}"
+    # dest: "/etc/nginx/sites-available/{{ item.dest }}"
+    src: "templates/sites-available/preprod.conf"
+    dest: "/etc/nginx/sites-available/preprod.conf"
+    owner: nginx
+    group: nginx
+    mode: 0644
+#   vars:
+#     SERVER_NAME: "{{ item.server_name }}"
+#   with_items:
+#     - { dest: preprod.conf, server_name: <YOUR_PRE-PROD_SERVER_NAME> }
+#     - { dest: prod.conf, server_name: <YOUR_PROD_SERVER_NAME>}
+  tags: nginx
+  
+# - name: Remove default file
+#   file:
+#     path: '/etc/nginx/sites-enabled/default'
+#     state: absent
+
+- name: create symlink
+  file:
+    src: "/etc/nginx/sites-available/{{item}}"
+    dest: "/etc/nginx/sites-enabled/{{item}}"
+    owner: nginx
+    group: nginx
+    mode: 0644
+    state: link
+  with_items:
+    - preprod.conf
+    # - prod.conf
+
+# - name: Creates logs directory
+#   file: path=/var/log/nginx state=directory owner=www-data group=www-data mode=0755
+
+# - name: Creates nginx acess log file
+#   file: path=/var/log/nginx/access.log owner=www-data group=www-data mode=0755
+
+# - name: Creates nginx error log file
+#   file: path=/var/log/nginx/error.log owner=www-data group=www-data mode=0755
+
+- name: Restart nginx service
+  systemd:
+    name: nginx
+    daemon_reload: yes
+    enabled: yes
+    state: restarted

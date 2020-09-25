@@ -7,6 +7,8 @@
 data_dir = "/var/lib/consul"
 ui = true
 
+enable_local_script_checks = true
+
 bind_addr = "0.0.0.0"
 client_addr = "0.0.0.0"
 advertise_addr = "{{ ansible_host }}"

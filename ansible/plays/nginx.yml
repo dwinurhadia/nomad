@@ -1,0 +1,16 @@
+- hosts: all
+  become: yes
+  become_user: root
+  gather_facts: False
+#   pre_tasks:
+#    - name: Install python for Ansible
+#      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+#      vars:
+#        rack: "Nginx"
+#        logs:
+#          - file: /var/log/nginx/access.log
+#            stream_name: access.log
+#          - file: /var/log/nginx/error.log
+#            stream_name: error.log
+  roles:
+   - { role: nginxsetup, tags: ["nginxsetup"] }
