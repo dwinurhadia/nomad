@@ -19,4 +19,4 @@ all:
                 node1:
         webservers:
             hosts:
-                node2:
+                node3:

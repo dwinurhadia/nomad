@@ -5,6 +5,13 @@
     name : [ mariadb-server, python3-mysqldb]
     state : present
 
+- name: Create mysql user
+  become: true
+  mysql_user:
+    name: "{{ wp_db_user }}"
+    password: "{{ wp_db_password }}"
+    priv: "*.*:ALL"
+
 - name: Create a new database with name 'dbwordpress'
   community.mysql.mysql_db:
     name: dbwordpress

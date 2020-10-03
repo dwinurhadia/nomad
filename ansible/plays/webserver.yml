@@ -2,8 +2,9 @@
   become: yes
   become_user: root
   roles:
-    # - nginx
+    - apache2
+    #  - nginx
     # - wordpress
     # - mariadb
-    - php
+     - php
     # - postfix
