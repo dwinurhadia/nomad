@@ -8,6 +8,6 @@
   replace: dest=/etc/php/7.4/fpm/php.ini regexp="(;cgi.fix_pathinfo=1)" replace="cgi.fix_pathinfo=0"
   become: yes
 
-- name: Add php settings
-  template: src=../../nginx/templates/sites-available/nginx-wp-common.conf dest=/etc/nginx/conf.d/nginx-wp-common.conf owner=www-data group=www-data mode=0644
-  become: yes
+# - name: Add php settings
+#   template: src=../../nginx/templates/sites-available/nginx-wp-common.conf dest=/etc/nginx/conf.d/nginx-wp-common.conf owner=www-data group=www-data mode=0644
+#   become: yes

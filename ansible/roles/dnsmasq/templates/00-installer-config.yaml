@@ -1,0 +1,10 @@
+network:
+    renderer: networkd
+    ethernets:
+      eth0:
+        dhcp4: true
+        dhcp4-overrides:
+            use-dns: false
+        nameservers:
+            addresses: [127.0.0.54]
+    version: 2
