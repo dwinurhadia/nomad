@@ -5,17 +5,58 @@
     name : [ mariadb-server, python3-mysqldb]
     state : present
 
-- name: Create mysql user
-  become: true
-  mysql_user:
-    name: "{{ wp_db_user }}"
-    password: "{{ wp_db_password }}"
-    priv: "*.*:ALL"
+- name: Start the MySQL service
+  action: service name=mariadb state=started    
 
-- name: Create a new database with name 'dbwordpress'
-  community.mysql.mysql_db:
-    name: dbwordpress
-    state: present    
+# - name: Set root user password
+#   # If .my.cnf already exists, this will cause an mysql-root-password update.
+#   mysql_user:
+#     name: root
+#     password: ''
+#     check_implicit_admin: true
+
+# - name: Create .my.cnf
+#   template:
+#    src: my.cnf.j2
+#    dest: /root/.my.cnf
+#    owner: root
+#    group: root
+#    mode: 0600
+  
+
+# - name: Copy .my.cnf file with root password credentials
+#   become: true
+#   become_user: root
+#   template: 
+#     src: my.cnf.j2 
+#     dest: /root/.my.cnf 
+
+# - name: Set root user password
+#   become: true
+#   become_user: root
+#   mysql_user:
+#     name: root
+#     host: "{{ item }}"
+#     password: root
+#     priv: "*.*:ALL,GRANT"
+#   with_items:
+#     - "{{ ansible_hostname }}"
+#     - 127.0.0.1
+#     - ::1
+#     - localhost
+
+# - name: Create mysql user
+#   become: true
+#   mysql_user:
+#     name: "{{ wp_db_user }}"
+#     password: "{{ wp_db_password }}"
+#     priv: "*.*:ALL"
+
+
+# - name: Create a new database with name 'dbwordpress'
+#   community.mysql.mysql_db:
+#     name: newwordpress
+#     state: present    
 
 - name: Restart mariadb service
   systemd:
@@ -24,10 +65,10 @@
     enabled: yes
     state: restarted
 
-- name: Try to create database as root/nopassword first. If not allowed, pass the credentials
-  community.mysql.mysql_db:
-    check_implicit_admin: yes
-    login_user: root
-#  login_password: 123456
-    name: dbwordpress
-    state: present
+# - name: Try to create database as root/nopassword first. If not allowed, pass the credentials
+#   community.mysql.mysql_db:
+#     check_implicit_admin: yes
+#     login_user: root
+#     login_password: "{{ mysql_root_password }}"
+#     name: dbwordpress
+#     state: present

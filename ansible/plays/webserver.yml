@@ -3,8 +3,8 @@
   become_user: root
   roles:
     - apache2
-    #  - nginx
-    # - wordpress
-    # - mariadb
-     - php
+    #  - nginx    
+    - mariadb
+    - wordpress
+    # - php
     # - postfix

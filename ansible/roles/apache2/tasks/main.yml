@@ -1,0 +1,42 @@
+- name: Install Apache PHP
+  become: yes
+  apt:
+    name : [ 'apache2', 'mariadb-server', 'python3-pymysql', 'php', 'php-mysql', 'libapache2-mod-php' ]
+    state : present
+
+- name: Install PHP Extensions
+  become: yes
+  apt: 
+    name: "{{ php_modules }}" 
+    state: present
+
+- name: Create document root
+  file:
+    state: directory
+    path: /var/www/html/wordpress
+    owner: www-data
+    group: www-data
+    mode: 0755
+  become: yes
+
+- name: Set up Apache VirtualHost
+  template: 
+    src: wp-apache.conf.j2
+    dest: /etc/apache2/sites-available/apache.conf
+
+- name: Enable rewrite module
+  shell: /usr/sbin/a2enmod rewrite
+  notify: 
+    - restart apache2
+  tags: [ apache ]
+
+- name: Enable new site
+  shell: /usr/sbin/a2ensite apache.conf
+  notify: 
+    - restart apache2
+  tags: [ apache ]
+
+# - name: Disable default Apache site
+#     shell: /usr/sbin/a2dissite 000-default.conf
+#     notify: Restart Apache
+#     tags: [ apache ]

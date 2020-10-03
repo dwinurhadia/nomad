@@ -1,0 +1,16 @@
+<VirtualHost *:80>
+   ServerAdmin webmaster@localhost
+   ServerName localhost
+   DocumentRoot /var/www/html/wordpress
+   ErrorLog ${APACHE_LOG_DIR}/wordpress_error.log
+   CustomLog ${APACHE_LOG_DIR}/wordpress_access.log combined
+
+   <Directory /var/www/html/wordpress>
+         Options -Indexes
+   </Directory>
+
+   <IfModule mod_dir.c>
+       DirectoryIndex index.php index.html index.cgi index.pl  index.xhtml index.htm
+   </IfModule>
+
+</VirtualHost>

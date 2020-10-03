@@ -1,14 +1,22 @@
+#System Settings
+php_modules: [ 'php-curl', 'php-gd', 'php-mbstring', 'php-xml', 'php-xmlrpc', 'php-soap', 'php-intl', 'php-zip' ]
+
+
+#HTTP Settings
+http_host: "your_domain"
+http_conf: "your_domain.conf"
+http_port: "80"
+
 # WordPress database settings
-wp_db_name: wordpress
+wp_db_name: dbwordpress
 wp_db_user: wordpress
 wp_db_password: wordpress_db_password
   
 mysql_port: 3306
-mysql_root_password: root
+mysql_root_password: kodokolo
 
 auto_up_disable: true
 
-# server_hostname: tucsonlabs.dev
 
 # WordPress Version
 wp_version: 5.5.1
