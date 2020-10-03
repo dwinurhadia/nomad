@@ -10,9 +10,13 @@ all:
             consul_server : yes
         node2:
             ansible_host : 10.55.254.134
+            webservers : yes
         node3:
             ansible_host : 10.55.254.132
     children:
         consul_server:
             hosts:
                 node1:
+        webservers:
+            hosts:
+                node2:

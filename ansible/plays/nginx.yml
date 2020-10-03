@@ -13,4 +13,4 @@
 #          - file: /var/log/nginx/error.log
 #            stream_name: error.log
   roles:
-   - { role: nginxsetup, tags: ["nginxsetup"] }
+   - { role: nginx, tags: ["nginxsetup"] }

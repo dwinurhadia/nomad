@@ -22,3 +22,9 @@ ssh-copy-id -i /home/d/.ssh/id_rsa.pub d@node-3
 ssh-copy-id -i /home/d/.ssh/id_rsa.pub d@node-2
 ssh-copy-id -i /home/d/.ssh/id_rsa.pub d@node-1
 ```
+
+## Install ansible galaxy untuk jalankan mysql/mariadb
+
+```
+ansible-galaxy collection install community.mysql
+```

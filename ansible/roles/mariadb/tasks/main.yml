@@ -1,0 +1,26 @@
+---
+- name: Install mariadb
+  become: yes
+  apt:
+    name : [ mariadb-server, python3-mysqldb]
+    state : present
+
+- name: Create a new database with name 'dbwordpress'
+  community.mysql.mysql_db:
+    name: dbwordpress
+    state: present    
+
+- name: Restart mariadb service
+  systemd:
+    name: mariadb
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+
+- name: Try to create database as root/nopassword first. If not allowed, pass the credentials
+  community.mysql.mysql_db:
+    check_implicit_admin: yes
+    login_user: root
+#  login_password: 123456
+    name: dbwordpress
+    state: present

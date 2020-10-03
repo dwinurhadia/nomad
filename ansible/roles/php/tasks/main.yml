@@ -1,0 +1,5 @@
+- name: Install php7
+  become: yes
+  apt:
+    name : [ php7.4, php7.4-mysql, php7.4-gd, php-ssh2]
+    state : present
